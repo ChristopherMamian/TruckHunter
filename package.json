@@ -1,0 +1,11 @@
+{
+  "name": "truck-hunt",
+  "version": "1.0.0",
+  "description": "Food truck finder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samantha Stallings <samantha.stallings1@gmail.com>",
+  "license": "ISC"
+}

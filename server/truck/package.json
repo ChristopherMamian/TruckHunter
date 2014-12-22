@@ -1,0 +1,10 @@
+{
+  "name": "truck",
+  "version": "0.0.0",
+  "description": "An app for keeping track of food trucks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samantha Stallings <samantha.stallings1@gmail.com>"
+}

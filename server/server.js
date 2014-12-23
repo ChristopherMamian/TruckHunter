@@ -10,6 +10,7 @@ var http = require('http'),
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT");
     next();
   });
 
@@ -32,8 +33,9 @@ var http = require('http'),
     app.use(express.errorHandler());
   }
 
-  app.get('/truck/:number', routes.truck);
-  app.get('/list', routes.list);
+  // app.get('/truck/:number', routes.truck);
+  // app.get('/list', routes.list);
   app.post('/createTruck', routes.createTruck);
+  app.put('/truck/:id/updateTruck', routes.updateTruck);
   app.get('/trucks', routes.trucks);
   app.listen(app.get('port'));

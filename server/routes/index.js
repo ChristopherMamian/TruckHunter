@@ -10,14 +10,39 @@ module.exports = function (trucks) {
 
 	var functions = {};
 
-	functions.truck = function(req, res){
-		var number = req.param('number');
+	functions.trucks = function (req, res) {
+		TruckSchema.find()
+      .setOptions({sort: 'username'})
+      .exec(function(err, users) {
+      if (err) {
+        res.status(500).json({status: 'failure'});
+      } else {
+        res.json(trucks);
+      }
+    });
+		res.json(trucks);
+	};
 
-		if (typeof trucks[number] === 'undefined') {
-			res.status(404).json({status: 'error'});
-		} else {
-			res.json(trucks[number].getInformation());
-		}
+	functions.createTruck = function (req, res) {
+		var truckName = "Sam's Truck";
+		var currentAddress = "spain";
+		var foodType = "mexican";
+		var active = false;
+
+		var record = new TaskSchema({
+      truckName: truckName,
+      currentAddress: currentAddress,
+      foodType:foodType,
+      active:active,
+      authorName: req.session.passport.user
+    });
+
+    record.save(function(err) {
+      if (err) {
+        console.log(err);
+        res.status(500).json({status: err});
+      }
+    });
 	};
 
 	functions.list = function (req, res) {

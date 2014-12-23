@@ -34,4 +34,6 @@ var http = require('http'),
 
   app.get('/truck/:number', routes.truck);
   app.get('/list', routes.list);
+  app.post('/createTruck', routes.createTruck);
+  app.get('/trucks', routes.trucks);
   app.listen(app.get('port'));

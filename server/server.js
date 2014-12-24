@@ -5,6 +5,9 @@ var http = require('http'),
   var express = require('express');
   var routes = require('./routes')(trucks);
   var path = require('path');
+  var mongoose = require('mongoose');
+  // var fs = require('fs')
+  // ** maybe needed to access file systems???
   var app = express();
 
   app.use(function(req, res, next) {
@@ -32,6 +35,32 @@ var http = require('http'),
   if ('development' == app.get('env')) {
     app.use(express.errorHandler());
   }
+
+
+
+  // ** maybe needed to load files at beggining of app?
+  // 
+  //fs.readdirSync(__dirname + '/schemas').forEach(function(filename){
+  //   if (~filename.indexOf('js')) require(__dirname + '/schemas' + filename)
+  // })
+
+
+
+
+// ** functions below are either alternatives to the ones posted below or are dynamic versions of them 
+
+// app.get('/trucks', function(req, res){
+//   mongoose.model('truck').find(function(err, trucks){
+//     res.send(trucks)
+//   })
+// })
+//** no model name to reference 
+// app.get('/createTruck', function(req, res){
+//   mongoose.model('posts??').find(function(err, trucks){
+//     res.send(posts)
+//   })
+
+
 
   // app.get('/truck/:number', routes.truck);
   // app.get('/list', routes.list);

@@ -3,7 +3,6 @@
   db = require('./db');
 
   var express = require('express');
-  // console.log(trucks);
   var routes = require('./routes')(trucks);
   var path = require('path');
   var app = express();
@@ -11,7 +10,7 @@
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT");
+    res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
     next();
   });
 
@@ -37,6 +36,7 @@
   app.post('/trucks/new', routes.createTruck);
   app.put('/truck/:id/edit', routes.updateTruck);
   app.get('/trucks', routes.trucks);
+  app.delete('/truck/:id/delete', routes.deleteTruck);
   app.listen(app.get('port'));
 
   // app.get('/truck/:number', routes.truck);

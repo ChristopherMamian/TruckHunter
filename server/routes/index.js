@@ -54,22 +54,33 @@ module.exports = function (trucks) {
 
   functions.updateTruck = function (req, res) {
 
-      var id = req.param('id');
+    var id = req.param('id');
 
-      Truck.update({ _id: id },
-      // TruckSchema.update({ _id: id },
-          { $set: { truckName: 'Nicks Tacos'}},
-          function (err) {
-              if (err) {
-                  console.log(err);
-                  res.status(500).json({status: 'failure'});
-              } else {
-                  res.json({status: 'success'});
-              }
+    Truck.update({ _id: id },
+    // TruckSchema.update({ _id: id },
+      { $set: { truckName: 'Nicks Tacos'}},
+        function (err) {
+          if (err) {
+            console.log(err);
+            res.status(500).json({status: 'failure'});
+          } else {
+            res.json({status: 'success'});
           }
-      );
+        }
+    );
 
   };
+
+  functions.deleteTruck = function (req, res) {
+
+  	var id = req.param('id');
+
+  	Truck.remove({_id: id}, function (err) {
+  		if (err) {
+  			console.log(err);
+  		}
+  	});
+  }
 
   functions.list = function (req, res) {
     res.json(trucks);

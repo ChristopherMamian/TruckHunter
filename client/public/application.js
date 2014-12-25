@@ -30,4 +30,14 @@ $.ajax({
     }).fail(function() {
       console.log('fail');
     });
+
+$.ajax({
+  //post from client at 9393 to server at 3000
+      url: 'http://localhost:3000/truck/549993771cf63e3cf9000001/delete',
+      type: 'delete'
+    }).done(function(res) {
+      console.log('delete success');
+    }).fail(function() {
+      console.log('fail');
+    });
 });

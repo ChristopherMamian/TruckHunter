@@ -1,17 +1,22 @@
 
-var TruckSchema = require('../schemas/truck');
+// var TruckSchema = require('../schemas/truck');
+var Truck = require('../schemas/truck');
+
 
 module.exports = function (trucks) {
-	var truck = require('../truck');
+  var truck = require('../truck');
 
-	for(var number in trucks) {
-		trucks[number] = truck(trucks[number]);
-	}
+  for(var number in trucks) {
+    trucks[number] = truck(trucks[number]);
+  }
 
-	var functions = {};
+  var functions = {};
 
-	functions.trucks = function (req, res) {
-		TruckSchema.find()
+  //corresponds to route in server.js
+  // ---> /trucks
+  functions.trucks = function (req, res) {
+    // TruckSchema.find()
+    Truck.find()
       .setOptions({sort: 'truckName'})
       .exec(function(err, trucks) {
       if (err) {
@@ -20,15 +25,18 @@ module.exports = function (trucks) {
         res.json(trucks);
       }
     });
-	};
+  };
 
-	functions.createTruck = function (req, res) {
-		var truckName = "Sam's Truck";
-		var currentAddress = "spain";
-		var foodType = "mexican";
-		var active = false;
+  //corresponds to route in server.js
+  // ---> /trucks/new
+  functions.createTruck = function (req, res) {
+    var truckName = "Sam's Truck";
+    var currentAddress = "spain";
+    var foodType = "mexican";
+    var active = false;
 
-		var record = new TruckSchema({
+    // var record = new TruckSchema({
+    var record = new Truck({
       truckName: truckName,
       currentAddress: currentAddress,
       foodType:foodType,
@@ -41,14 +49,15 @@ module.exports = function (trucks) {
         res.status(500).json({status: err});
       }
     });
-	};
+  };
 
 
   functions.updateTruck = function (req, res) {
 
       var id = req.param('id');
 
-      TruckSchema.update({ _id: id },
+      Truck.update({ _id: id },
+      // TruckSchema.update({ _id: id },
           { $set: { truckName: 'Nicks Tacos'}},
           function (err) {
               if (err) {
@@ -62,9 +71,9 @@ module.exports = function (trucks) {
 
   };
 
-	functions.list = function (req, res) {
-		res.json(trucks);
-	};
+  functions.list = function (req, res) {
+    res.json(trucks);
+  };
 
-	return functions;
+  return functions;
 };

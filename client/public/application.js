@@ -4,7 +4,8 @@ $.ajax({
   //request from client at 9393 to server at 3000
       url: 'http://localhost:3000/trucks',
       type: 'get'
-    }).done(function() {
+    }).done(function(res) {
+      console.log(res);
       console.log('success');
     }).fail(function() {
       console.log('fail');
@@ -12,9 +13,9 @@ $.ajax({
 
 $.ajax({
   //post from client at 9393 to server at 3000
-      url: 'http://localhost:3000/createTruck',
+      url: 'http://localhost:3000/trucks/new',
       type: 'post'
-    }).done(function(res) {
+    }).done(function() {
       console.log('post success');
     }).fail(function() {
       console.log('fail');
@@ -22,12 +23,11 @@ $.ajax({
 
 $.ajax({
   //post from client at 9393 to server at 3000
-      url: 'http://localhost:3000/truck/549993771cf63e3cf9000001/updateTruck',
+      url: 'http://localhost:3000/truck/549993771cf63e3cf9000001/edit',
       type: 'put'
     }).done(function(res) {
       console.log('update success');
     }).fail(function() {
       console.log('fail');
     });
-
 });

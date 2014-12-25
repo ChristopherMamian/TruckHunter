@@ -1,13 +1,11 @@
-var http = require('http'),
-	trucks = require('./data'),
-	db = require('./db');
+  var http = require('http'),
+  trucks = require('./data'),
+  db = require('./db');
 
   var express = require('express');
+  // console.log(trucks);
   var routes = require('./routes')(trucks);
   var path = require('path');
-  var mongoose = require('mongoose');
-  // var fs = require('fs')
-  // ** maybe needed to access file systems???
   var app = express();
 
   app.use(function(req, res, next) {
@@ -36,35 +34,36 @@ var http = require('http'),
     app.use(express.errorHandler());
   }
 
+  app.post('/trucks/new', routes.createTruck);
+  app.put('/truck/:id/edit', routes.updateTruck);
+  app.get('/trucks', routes.trucks);
+  app.listen(app.get('port'));
+
+  // app.get('/truck/:number', routes.truck);
+  // app.get('/list', routes.list);
 
 
-  // ** maybe needed to load files at beggining of app?
-  // 
-  //fs.readdirSync(__dirname + '/schemas').forEach(function(filename){
-  //   if (~filename.indexOf('js')) require(__dirname + '/schemas' + filename)
-  // })
+  // Sam's Notes //
+  /*
+  The route you hit in the server is on the left
+  and the action that occurs inside of the route is
+  on the right ---> 'routes.createTruck'.
+  */
 
+/* Nick, what you noted below are indeed alternatives
+to the way we have it above. The example you show below uses anonymous functions, and we have named functions. Named functions should make it more readable for all of us and easier to follow what is going on. The way we have it separates the function part of the http request into the routes index.js file. - Sam
+*/
 
-
-
-// ** functions below are either alternatives to the ones posted below or are dynamic versions of them 
+// Nick's Notes //
+// ** functions below are either alternatives to the ones posted below or are dynamic versions of them
 
 // app.get('/trucks', function(req, res){
 //   mongoose.model('truck').find(function(err, trucks){
 //     res.send(trucks)
 //   })
 // })
-//** no model name to reference 
+//** no model name to reference
 // app.get('/createTruck', function(req, res){
 //   mongoose.model('posts??').find(function(err, trucks){
 //     res.send(posts)
 //   })
-
-
-
-  // app.get('/truck/:number', routes.truck);
-  // app.get('/list', routes.list);
-  app.post('/createTruck', routes.createTruck);
-  app.put('/truck/:id/updateTruck', routes.updateTruck);
-  app.get('/trucks', routes.trucks);
-  app.listen(app.get('port'));

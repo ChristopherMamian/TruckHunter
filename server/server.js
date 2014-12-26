@@ -1,9 +1,11 @@
   var http = require('http'),
-  trucks = require('./data'),
+  // trucks = require('./data'),
   db = require('./db');
 
   var express = require('express');
-  var routes = require('./routes')(trucks);
+    // var routes = require('./routes')(trucks);
+
+  var routes = require('./routes')(db);
   var path = require('path');
   var app = express();
 
@@ -36,6 +38,10 @@
   app.post('/trucks/new', routes.createTruck);
   app.put('/truck/:id/edit', routes.updateTruck);
   app.get('/trucks', routes.trucks);
+  app.get('/users', routes.users);
+  app.post('/users/new', routes.createUser);
+  app.put('/users/followTruck', routes.followTruck);
+  app.get('/users/:id/trucks', routes.showFollowedTrucks);
   app.delete('/truck/:id/delete', routes.deleteTruck);
   app.listen(app.get('port'));
 

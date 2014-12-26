@@ -40,4 +40,36 @@ $.ajax({
     }).fail(function() {
       console.log('fail');
     });
+
+
+$.ajax({
+//request from client at 9393 to server at 3000
+    url: 'http://localhost:3000/users',
+    type: 'get'
+  }).done(function(res) {
+    console.log(res);
+    console.log('success');
+  }).fail(function() {
+    console.log('fail');
+  });
+
+$.ajax({
+  //post from client at 9393 to server at 3000
+      url: 'http://localhost:3000/users/new',
+      type: 'post'
+    }).done(function() {
+      console.log('post success');
+    }).fail(function() {
+      console.log('fail');
+    });
+
+$.ajax({
+  //post from client at 9393 to server at 3000
+      url: 'http://localhost:3000/users/followTruck',
+      type: 'put'
+    }).done(function() {
+      console.log('truck followed');
+    }).fail(function() {
+      console.log('fail');
+    });
 });

@@ -5,7 +5,8 @@
   // all environments
   app.set('port', process.env.PORT || 9393);
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.engine('html', require('ejs').renderFile);
+  app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -21,5 +22,11 @@
   if ('development' == app.get('env')) {
     app.use(express.errorHandler());
   }
+
+  console.log(__dirname);
+
+  app.get('/', function( req, res ){
+    res.render('index.html');
+  });
 
   app.listen(app.get('port'));

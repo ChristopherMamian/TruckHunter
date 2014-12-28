@@ -6,6 +6,7 @@
     "start": "node client.js"
   },
   "dependencies": {
+    "ejs": "^1.0.0",
     "express": "3.4.0",
     "jade": "*",
     "mongoose": "~3.6.19"

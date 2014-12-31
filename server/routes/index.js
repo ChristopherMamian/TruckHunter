@@ -227,43 +227,6 @@ module.exports = function () {
     });
   };
 
-
-  // functions.requestAction = function(req, res){
-  //       var friendID = req.param('friendID');
-  //       var action = req.param('action');
-
-  //       if(action == 'accept'){
-
-  //           UserSchema.update({username: req.session.passport.user}, {$push: {friends:[friendID]}}, {} , function(err) {
-  //               if (err)
-  //               res.send(err);
-
-  //               UserSchema.update({username: friendID}, {$push: {friends:[req.session.passport.user]}}, {} , function(err) {
-  //                   if (err)
-  //                   res.send(err);
-  //               });
-  //               RequestSchema.remove({ sender: friendID }, function (err) {
-  //                   if (err) {
-  //                       console.log(err);
-  //                       res.status(500).json({status: 'failure'});
-  //                   }
-  //               });
-
-  //               res.redirect('/friends');
-  //           });
-  //       }else{
-  //           RequestSchema.remove({ sender: friendID }, function (err) {
-  //               if (err) {
-  //                   console.log(err);
-  //                   res.status(500).json({status: 'failure'});
-  //               }
-  //           });
-  //           res.redirect('/userFriendRequests');
-  //       }
-  //   };
-
-
-
   functions.list = function (req, res) {
     res.json(trucks);
   };

@@ -54,94 +54,8 @@
   app.post('/signin', routes.signin);
   app.get('/me', routes.ensureAuthorized, routes.me);
 
-//   app.post('/authenticate', function(req, res) {
-//     User.findOne({email: req.body.email, password: req.body.password}, function(err, user) {
-//         if (err) {
-//             res.json({
-//                 type: false,
-//                 data: "Error occured: " + err
-//             });
-//         } else {
-//             if (user) {
-//                res.json({
-//                     type: true,
-//                     data: user,
-//                     token: user.token
-//                 });
-//             } else {
-//                 res.json({
-//                     type: false,
-//                     data: "Incorrect email/password"
-//                 });
-//             }
-//         }
-//     });
-// });
+  //These routes handles user login, signup and token based auth. The /me route is protected and can only be seen by users that have accounts. I deleted the /users/new route above because this is taken care of in the signin route. -Sam
 
-
-// app.post('/signin', function(req, res) {
-//     User.findOne({email: req.body.email, password: req.body.password}, function(err, user) {
-//         if (err) {
-//             res.json({
-//                 type: false,
-//                 data: "Error occured: " + err
-//             });
-//         } else {
-//             if (user) {
-//                 res.json({
-//                     type: false,
-//                     data: "User already exists!"
-//                 });
-//             } else {
-//                 var userModel = new User();
-//                 userModel.email = req.body.email;
-//                 userModel.password = req.body.password;
-//                 userModel.save(function(err, user) {
-//                     user.token = jwt.sign(user, 'shhhhh');
-
-
-//                     user.save(function(err, user1) {
-//                         res.json({
-//                             type: true,
-//                             data: user1,
-//                             token: user1.token
-//                         });
-//                     });
-//                 });
-//             }
-//         }
-//     });
-// });
-
-// app.get('/me', ensureAuthorized, function(req, res) {
-//     User.findOne({token: req.token}, function(err, user) {
-//         if (err) {
-//             res.json({
-//                 type: false,
-//                 data: "Error occured: " + err
-//             });
-//         } else {
-//             res.json({
-//                 type: true,
-//                 data: user
-//             });
-//         }
-//     });
-// });
-
-// function ensureAuthorized(req, res, next) {
-//     var bearerToken;
-//     var bearerHeader = req.headers["authorization"];
-//     if (typeof bearerHeader !== 'undefined') {
-//         var bearer = bearerHeader.split(" ");
-//         bearerToken = bearer[1];
-//         req.token = bearerToken;
-//         next();
-//     } else {
-//         // res.send(403);
-//         res.status(403).end();
-//     }
-// }
 
 process.on('uncaughtException', function(err) {
     console.log(err);
@@ -159,20 +73,20 @@ process.on('uncaughtException', function(err) {
   on the right ---> 'routes.createTruck'.
   */
 
-/* Nick, what you noted below are indeed alternatives
-to the way we have it above. The example you show below uses anonymous functions, and we have named functions. Named functions should make it more readable for all of us and easier to follow what is going on. The way we have it separates the function part of the http request into the routes index.js file. - Sam
-*/
+  /* Nick, what you noted below are indeed alternatives
+  to the way we have it above. The example you show below uses anonymous functions, and we have named functions. Named functions should make it more readable for all of us and easier to follow what is going on. The way we have it separates the function part of the http request into the routes index.js file. - Sam
+  */
 
-// Nick's Notes //
-// ** functions below are either alternatives to the ones posted below or are dynamic versions of them
+  // Nick's Notes //
+  // ** functions below are either alternatives to the ones posted below or are dynamic versions of them
 
-// app.get('/trucks', function(req, res){
-//   mongoose.model('truck').find(function(err, trucks){
-//     res.send(trucks)
-//   })
-// })
-//** no model name to reference
-// app.get('/createTruck', function(req, res){
-//   mongoose.model('posts??').find(function(err, trucks){
-//     res.send(posts)
-//   })
+  // app.get('/trucks', function(req, res){
+  //   mongoose.model('truck').find(function(err, trucks){
+  //     res.send(trucks)
+  //   })
+  // })
+  //** no model name to reference
+  // app.get('/createTruck', function(req, res){
+  //   mongoose.model('posts??').find(function(err, trucks){
+  //     res.send(posts)
+  //   })

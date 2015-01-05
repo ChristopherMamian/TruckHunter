@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+angular.module('ngSwipeLeftExample', ['ngTouch']);
+
 $.ajax({
   //request from client at 9393 to server at 3000
       url: 'http://localhost:3000/trucks',

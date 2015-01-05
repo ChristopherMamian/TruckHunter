@@ -6,6 +6,18 @@
 </head>
 <body>
   <h1>CLIENT</h1>
+
+
+<!-- Boilerplate angular code -->
+
+	<div ng-show="!showActions" ng-swipe-left="showActions = true">
+	  Some list content, like an email in the inbox
+	</div>
+	<div ng-show="showActions" ng-swipe-right="showActions = false">
+	  <button ng-click="reply()">Reply</button>
+	  <button ng-click="delete()">Delete</button>
+	</div>
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="application.js"></script>
 

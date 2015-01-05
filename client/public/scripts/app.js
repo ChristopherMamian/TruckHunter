@@ -1,10 +1,14 @@
 'use strict';
+var app = angular.module('angularRestfulAuth', ['ngStorage',
+    'ngRoute',
+    'google-maps'] );
 
-angular.module('angularRestfulAuth', [
-    'ngStorage',
-    'ngRoute'
-])
-.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+// angular.module('angularRestfulAuth', [
+//     'ngStorage',
+//     'ngRoute',
+//     'google-maps'
+// ])
+app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
     $routeProvider.
         when('/', {
@@ -25,7 +29,7 @@ angular.module('angularRestfulAuth', [
         }).
         when('/trucks', {
             templateUrl: 'partials/trucks.html',
-            controller: 'HomeCtrl'
+            controller: 'MapCtrl'
         }).
         otherwise({
             redirectTo: '/'

@@ -7,10 +7,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Restful Authentication with NodeJS & AngularJS</title>
+    <title>Truck Hunt</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/maps.css" />
+
 
     <style>
         body {
@@ -18,6 +20,8 @@
             padding-bottom: 40px;
             background-color: #eee;
         }
+
+
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -53,14 +57,35 @@
         </div>
     </div>
 
+
     <div class="container" ng-view="">
 
     </div> <!-- /container -->
 
+
+<!-- Angular  -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+
+<!-- Google maps -->
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-maps/1.2.2/angular-google-maps.min.js"></script>
+<!-- Angular Google maps -->
+<script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/19/4/geocoder.js"></script>
+
+
+
+
+        <!-- Google Maps -->
+
+
+        <!-- angular-goole-maps -->
+
+<!-- Local Scripts -->
 <script src="/lib/ngStorage.js"></script>
 <script src="/scripts/app.js"></script>
 <script src="/scripts/controllers.js"></script>

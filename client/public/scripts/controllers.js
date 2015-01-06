@@ -2,7 +2,6 @@
 
 /* Controllers */
 
-// angular.module('angularRestfulAuth')
     app.controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', function($rootScope, $scope, $location, $localStorage, Main) {
 
         $scope.signin = function() {
@@ -57,9 +56,9 @@
 }])
 
 
-.controller('MapCtrl', ['MarkerMaker', '$scope', function(MarkerMaker, $scope) {
-    console.log(MarkerMaker);
-        MarkerMaker.createByCoords(37.779277, -122.41927, function(marker) {
+.controller('MapCtrl', ['MarkerFactory', '$scope', function(MarkerFactory, $scope) {
+    console.log(MarkerFactory);
+        MarkerFactory.createByCoords(37.779277, -122.41927, function(marker) {
             marker.options.labelContent = 'San Francisco';
             $scope.sfMarker = marker;
         });
@@ -82,7 +81,7 @@
         $scope.map.markers.push($scope.sfMarker);
 
         $scope.addCurrentLocation = function () {
-            MarkerMaker.createByCurrentLocation(function(marker) {
+            MarkerFactory.createByCurrentLocation(function(marker) {
                 marker.options.labelContent = 'You´re here';
                 $scope.map.markers.push(marker);
                 refresh(marker);
@@ -92,7 +91,7 @@
         $scope.addAddress = function() {
             var address = $scope.address;
             if (address !== '') {
-                MarkerMaker.createByAddress(address, function(marker) {
+                MarkerFactory.createByAddress(address, function(marker) {
                     $scope.map.markers.push(marker);
                     refresh(marker);
                 });

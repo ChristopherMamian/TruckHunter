@@ -53,7 +53,6 @@
                 $http.get(baseUrl + '/trucks').success(success).error(error)
             },
 
-
             logout: function(success) {
                 changeUser({});
                 delete $localStorage.token;
@@ -63,9 +62,7 @@
     }
 ])
 
-
-
-.factory('MarkerMaker', function () {
+.factory('MarkerFactory', function () {
 
     var markerId = 0;
 

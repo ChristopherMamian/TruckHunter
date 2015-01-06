@@ -48,9 +48,9 @@ module.exports = function () {
             res.status(500).json({status: err});
           }
         });
-    }
+    };
 
-  };
+  // };
 
 
   functions.users = function (req, res) {
@@ -145,7 +145,30 @@ module.exports = function () {
     });
   };
 
+  functions.meTrucks = function(req, res) {
+    console.log("meTrucks",req.token);
+    User.findOne({token: req.token}, function(err, user) {
+        if (err) {
+          console.log("error")
+            res.json({
+                type: false,
+                data: "Error occured: " + err
+            });
+        }
+
+        if (user) {
+          console.log("User");
+          Truck.find({ _id: {$in: user.trucksFollowing }}, function(err, trucks){
+            res.json(trucks);
+          });
+        }
+
+
+    });
+  };
+
   functions.me = function(req, res) {
+    console.log("me", req.token);
     User.findOne({token: req.token}, function(err, user) {
         if (err) {
             res.json({
@@ -196,13 +219,13 @@ module.exports = function () {
 
   functions.deleteTruck = function (req, res) {
 
-  	var id = req.param('id');
+    var id = req.param('id');
 
-  	Truck.remove({_id: id}, function (err) {
-  		if (err) {
-  			console.log(err);
-  		}
-  	});
+    Truck.remove({_id: id}, function (err) {
+      if (err) {
+        console.log(err);
+      }
+    });
   };
 
   functions.followTruck = function (req, res) {
@@ -218,7 +241,7 @@ module.exports = function () {
   };
 
   functions.showFollowedTrucks = function (req, res) {
-    var userID = "54a43031201e3e7a887e1c37";
+    var userID = req.param('id');
 
     User.findOne({ _id: userID}, function( err, user){
       if (err){
@@ -233,9 +256,27 @@ module.exports = function () {
     });
   };
 
+
   functions.list = function (req, res) {
     res.json(trucks);
   };
+
+
+  // functions.me = function(req, res) {
+  //   User.findOne({token: req.token}, function(err, user) {
+  //       if (err) {
+  //           res.json({
+  //               type: false,
+  //               data: "Error occured: " + err
+  //           });
+  //       } else {
+  //           res.json({
+  //               type: true,
+  //               data: user
+  //           });
+  //       }
+  //   });
+  // };
 
   return functions;
 };

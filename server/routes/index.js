@@ -26,26 +26,32 @@ module.exports = function () {
   //corresponds to route in server.js
   // ---> /trucks/new
   functions.createTruck = function (req, res) {
-    var truckName = "Sam's Truck";
-    var currentAddress = "spain";
-    var foodType = "mexican";
-    var active = false;
+    //Put array of truck objects here if you want to add more
+    // for(var i = 0; i < trucks.length; i++){
+    //   var trukName = trucks[i].Name;
+    //   var twitHandle = trucks[i].Handle;
+    //   var twitURL = trucks[i].TwitterAccount;
+    //   var Type = trucks[i].Type;
+    //   var img = trucks[i].Img;
 
-    // var record = new TruckSchema({
-    var record = new Truck({
-      truckName: truckName,
-      currentAddress: currentAddress,
-      foodType:foodType,
-      active:active
-    });
+        var record = new Truck({
+          truckName: trukName,
+          twitterHandle: twitHandle,
+          twitterURL: twitURL,
+          foodType: Type,
+          profPic: img
+        });
 
-    record.save(function(err) {
-      if (err) {
-        console.log(err);
-        res.status(500).json({status: err});
-      }
-    });
+        record.save(function(err) {
+          if (err) {
+            console.log(err);
+            res.status(500).json({status: err});
+          }
+        });
+    }
+
   };
+
 
   functions.users = function (req, res) {
     // TruckSchema.find()

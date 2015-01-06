@@ -108,7 +108,7 @@
                 var marker = create(latitude, longitude);
                 invokeSuccessCallback(successCallback, marker);
             } else {
-                alert("Unknown address: " + address);
+                // alert("Unknown address: " + address);
             }
         });
     }

@@ -57,10 +57,25 @@
 }])
 
 
-.controller('MapCtrl', ['MarkerFactory', '$scope', function(MarkerFactory, $scope) {
-    console.log(MarkerFactory);
+.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(MarkerFactory, TruckFactory, $scope) {
+
+
+    $scope.$parent.$watch("trucks", function(newValue, oldValue) {
+        var trucks = $scope.$parent.trucks;
+        if (trucks.length > 0) {
+            for(var i = 0; i < trucks.length; i++){
+                var address = trucks[i].currentAddress;
+                if (address) {
+                    MarkerFactory.createByAddress(address, function(marker) {
+                        $scope.map.markers.push(marker);
+                        refresh(marker);
+                    });
+                }
+            }
+        }
+    });
+
         MarkerFactory.createByCoords(37.779277, -122.41927, function(marker) {
-            marker.options.labelContent = 'San Francisco';
             $scope.sfMarker = marker;
         });
 
@@ -90,6 +105,7 @@
         };
 
         $scope.addAddress = function() {
+            //add addresses here from truckFactory
             var address = $scope.address;
             if (address !== '') {
                 MarkerFactory.createByAddress(address, function(marker) {
@@ -108,14 +124,15 @@
 
 .controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'TruckFactory', function($rootScope, $scope, $location, $localStorage, TruckFactory) {
 
-        $scope.trucks = function() {
+        $scope.getTrucks = function() {
             TruckFactory.trucks(function(res) {
-                $scope.truckDetails = res;
+                $scope.trucks = res;
             }, function() {
                 $rootScope.error = 'Failed to fetch details';
             });
         };
-        $scope.trucks();
+        $scope.getTrucks();
+
 }]);
 
 /*

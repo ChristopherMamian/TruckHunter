@@ -8,15 +8,15 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
     $routeProvider.
         when('/', {
             templateUrl: 'partials/home.html',
-            controller: 'HomeCtrl'
+            controller: 'AuthCtrl'
         }).
         when('/signin', {
             templateUrl: 'partials/signin.html',
-            controller: 'HomeCtrl'
+            controller: 'AuthCtrl'
         }).
         when('/signup', {
             templateUrl: 'partials/signup.html',
-            controller: 'HomeCtrl'
+            controller: 'AuthCtrl'
         }).
         when('/me', {
             templateUrl: 'partials/me.html',
@@ -24,7 +24,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         }).
         when('/trucks', {
             templateUrl: 'partials/trucks.html',
-            controller: 'MapCtrl'
+            controller: 'TruckCtrl'
         }).
         otherwise({
             redirectTo: '/'

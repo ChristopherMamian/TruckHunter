@@ -1,8 +1,9 @@
 'use strict';
 
 /* Controllers */
+//See comments at bottom of page for explanations.
 
-    app.controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'AuthFactory', function($rootScope, $scope, $location, $localStorage, AuthFactory) {
+    app.controller('AuthCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'AuthFactory', function($rootScope, $scope, $location, $localStorage, AuthFactory) {
 
         $scope.signin = function() {
             var formData = {
@@ -117,10 +118,27 @@
         $scope.trucks();
 }]);
 
+/*
+The AuthCtrl
+ is the controller that handles user auth. Depending on the view, it will login, signup, or logout a user. We are injecting a factory called AuthFactory from the factories.js file. Now we have access to the functionality of the factory within the controller. The factory helps keep the controller cleaner. We are using $rootScope here for error messages, $scope to add some variables to the scope of the controller / views related to that controller. $location is used to provide a redirect path. For example, once a user signs in they will be redirected to the "/me" route. When a user logs out they will be redirected to the "/" home page. $localStorage is used to store our user tokens
+*/
 
-//every page 1 controller
-//sometimes more than 1 controller
-//create truck factory for trucks
-//make auth factory
-//user factory
-//
+/*
+The MapCtrl
+ Read the tutorials I sent out online for further explanations on the map controller. The map controller creates the map using our given lat/long center point(SF). The map controller also adds the pins to the map using the MarkerFactory that is injected into the controller.
+*/
+
+/*
+The MapCtrl
+ Read the tutorials I sent out online for further explanations on the map controller. The map controller creates the map using our given lat/long center point(SF). The map controller also adds the pins to the map using the MarkerFactory that is injected into the controller.
+*/
+
+/*
+The MeCtrl
+ The Me controller also depends on the AuthFactory because it needs the token as well. Users cannot access the /me route unless they have been authenticated and the AuthFactory checks that for us. The Me Ctrl also grabs user info for us through the AuthFactory. If you look at the return in the AuthFactory you will see that it has the following
+            me: function(success, error) {
+                $http.get(baseUrl + '/me').success(success).error(error)
+            }
+ This hits the server for us and grabs the users information(name, followedTrucks, etc) which we use on line 51 of this file --> $scope.myDetails = res; <--.
+*/
+

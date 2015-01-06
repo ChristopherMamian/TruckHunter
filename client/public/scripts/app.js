@@ -3,33 +3,28 @@ var app = angular.module('angularRestfulAuth', ['ngStorage',
     'ngRoute',
     'google-maps'] );
 
-// angular.module('angularRestfulAuth', [
-//     'ngStorage',
-//     'ngRoute',
-//     'google-maps'
-// ])
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
     $routeProvider.
         when('/', {
             templateUrl: 'partials/home.html',
-            controller: 'HomeCtrl'
+            controller: 'AuthCtrl'
         }).
         when('/signin', {
             templateUrl: 'partials/signin.html',
-            controller: 'HomeCtrl'
+            controller: 'AuthCtrl'
         }).
         when('/signup', {
             templateUrl: 'partials/signup.html',
-            controller: 'HomeCtrl'
+            controller: 'AuthCtrl'
         }).
         when('/me', {
             templateUrl: 'partials/me.html',
-            controller: 'HomeCtrl'
+            controller: 'MeCtrl'
         }).
         when('/trucks', {
             templateUrl: 'partials/trucks.html',
-            controller: 'MapCtrl'
+            controller: 'TruckCtrl'
         }).
         otherwise({
             redirectTo: '/'

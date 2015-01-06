@@ -1,7 +1,7 @@
 'use strict';
 
 // angular.module('angularRestfulAuth')
-    app.factory('Main', ['$http', '$localStorage', function($http, $localStorage){
+    app.factory('AuthFactory', ['$http', '$localStorage', function($http, $localStorage){
         var baseUrl = "http://localhost:3000";
 
         function changeUser(user) {
@@ -49,11 +49,6 @@
                 $http.get(baseUrl + '/me').success(success).error(error)
             },
 
-            trucks: function(success, error) {
-                $http.get(baseUrl + '/trucks').success(success).error(error)
-            },
-
-
             logout: function(success) {
                 changeUser({});
                 delete $localStorage.token;
@@ -63,9 +58,17 @@
     }
 ])
 
+.factory('TruckFactory', ['$http', function($http){
+        var baseUrl = "http://localhost:3000";
 
+        return {
+            trucks: function(success, error) {
+                $http.get(baseUrl + '/trucks').success(success).error(error)
+            }
+        }
+}])
 
-.factory('MarkerMaker', function () {
+.factory('MarkerFactory', function () {
 
     var markerId = 0;
 
@@ -105,7 +108,7 @@
                 var marker = create(latitude, longitude);
                 invokeSuccessCallback(successCallback, marker);
             } else {
-                alert("Unknown address: " + address);
+                // alert("Unknown address: " + address);
             }
         });
     }

@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-    app.controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', function($rootScope, $scope, $location, $localStorage, Main) {
+    app.controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'AuthFactory', function($rootScope, $scope, $location, $localStorage, AuthFactory) {
 
         $scope.signin = function() {
             var formData = {
@@ -10,7 +10,7 @@
                 password: $scope.password
             }
 
-            Main.signin(formData, function(res) {
+            AuthFactory.signin(formData, function(res) {
                 $localStorage.token = res.data.token;
                 $location.path('/me');
             }, function() {
@@ -24,7 +24,7 @@
                 password: $scope.password
             }
 
-            Main.save(formData, function(res) {
+            AuthFactory.save(formData, function(res) {
                 $localStorage.token = res.data.token;
                 if (!$localStorage.token) {
                     throw "not ok";
@@ -36,7 +36,7 @@
         };
 
         $scope.logout = function() {
-            Main.logout(function() {
+            AuthFactory.logout(function() {
                 $location.path('/');
             }, function() {
                 $rootScope.error = 'Failed to logout';
@@ -44,9 +44,9 @@
         };
     }])
 
-.controller('MeCtrl', ['$rootScope', '$scope', '$location', 'Main', function($rootScope, $scope, $location, Main) {
+.controller('MeCtrl', ['$rootScope', '$scope', '$location', 'AuthFactory', function($rootScope, $scope, $location, AuthFactory) {
         $scope.me = function() {
-            Main.me(function(res) {
+            AuthFactory.me(function(res) {
                 $scope.myDetails = res;
             }, function() {
                 $rootScope.error = 'Failed to fetch details';
@@ -105,10 +105,10 @@
 
     }])
 
-.controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', function($rootScope, $scope, $location, $localStorage, Main) {
+.controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'TruckFactory', function($rootScope, $scope, $location, $localStorage, TruckFactory) {
 
         $scope.trucks = function() {
-            Main.trucks(function(res) {
+            TruckFactory.trucks(function(res) {
                 $scope.truckDetails = res;
             }, function() {
                 $rootScope.error = 'Failed to fetch details';

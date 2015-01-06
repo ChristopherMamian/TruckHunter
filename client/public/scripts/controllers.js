@@ -109,5 +109,24 @@
                 longitude: marker.longitude});
         }
 
-    }]);
+    }])
 
+.controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', function($rootScope, $scope, $location, $localStorage, Main) {
+
+        $scope.trucks = function() {
+            Main.trucks(function(res) {
+                $scope.truckDetails = res;
+            }, function() {
+                $rootScope.error = 'Failed to fetch details';
+            });
+        };
+        $scope.trucks();
+}]);
+
+
+//every page 1 controller
+//sometimes more than 1 controller
+//create truck factory for trucks
+//make auth factory
+//user factory
+//

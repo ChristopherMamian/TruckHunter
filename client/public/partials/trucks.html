@@ -1,10 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <div class="jumbotron">
-            <p class="strong">
-                Display of trucks in SF for browsing users without accounts
-            </p>
-        </div>
+
         <div ng-controller="MapCtrl">
 
           <div class="map_container" >
@@ -24,12 +20,17 @@
 
           <!-- test -->
           <div ng-controller="TruckCtrl">
-            <p ng-repeat="truck in truckDetails">
-              {{truck}}
-            </p>
+            <div ng-repeat="truck in truckDetails">
+             <h3> {{truck.truckName}} </h3>
+             <p> {{truck.currentAddress}} </p>
+             <p> {{truck.foodType}} </p>
+
+            </div>
           </div>
           <!-- test -->
 
         </div>
+
+
     </div>
 </div>

@@ -3,11 +3,6 @@ var app = angular.module('angularRestfulAuth', ['ngStorage',
     'ngRoute',
     'google-maps'] );
 
-// angular.module('angularRestfulAuth', [
-//     'ngStorage',
-//     'ngRoute',
-//     'google-maps'
-// ])
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
     $routeProvider.
@@ -25,7 +20,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         }).
         when('/me', {
             templateUrl: 'partials/me.html',
-            controller: 'HomeCtrl'
+            controller: 'MeCtrl'
         }).
         when('/trucks', {
             templateUrl: 'partials/trucks.html',

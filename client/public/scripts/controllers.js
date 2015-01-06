@@ -36,14 +36,6 @@
             })
         };
 
-        $scope.me = function() {
-            Main.me(function(res) {
-                $scope.myDetails = res;
-            }, function() {
-                $rootScope.error = 'Failed to fetch details';
-            })
-        };
-
         $scope.logout = function() {
             Main.logout(function() {
                 $location.path('/');
@@ -54,13 +46,16 @@
     }])
 
 .controller('MeCtrl', ['$rootScope', '$scope', '$location', 'Main', function($rootScope, $scope, $location, Main) {
-
-        Main.me(function(res) {
-            $scope.myDetails = res;
-        }, function() {
-            $rootScope.error = 'Failed to fetch details';
-        });
+        $scope.me = function() {
+            Main.me(function(res) {
+                $scope.myDetails = res;
+            }, function() {
+                $rootScope.error = 'Failed to fetch details';
+            });
+        };
+        $scope.me();
 }])
+
 
 .controller('MapCtrl', ['MarkerMaker', '$scope', function(MarkerMaker, $scope) {
     console.log(MarkerMaker);

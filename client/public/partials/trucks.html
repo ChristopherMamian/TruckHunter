@@ -3,6 +3,9 @@
     <div ng-controller="TruckCtrl">
 
       <div ng-controller="MapCtrl">
+        <p>
+                <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
+            </p>
 
         <div class="map_container" >
           <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
@@ -11,7 +14,35 @@
           </google-map>
         </div>
 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
         <div class="controls">
+          <!-- <h3>Current location</h3> -->
+
           <!-- <p>
             <input type="text" placeholder="San Francisco, Ca" ng-model="address" style="width: 210px"/>
             <button ng-click="addAddress()">Get pin</button>
@@ -19,7 +50,6 @@
         </div>
 
       </div>
-
         <div ng-repeat="(prop, ignoredValue) in trucks[0]" ng-init="filter[prop]={}">
           <div ng-if="prop == 'foodType' ">
           <b>{{prop | capitalizeFirst}}:</b><br />
@@ -30,6 +60,7 @@
         </div>
       </div>
 
+        Number of results: {{filtered.length}}
         <div ng-repeat="truck in filtered=(trucks | filter:filterByProperties)">
             <h3> {{truck.truckName}} </h3>
               <p> {{truck.currentAddress}} </p>
@@ -38,7 +69,7 @@
               <button ng-click="followTruck(truck._id)">Follow</button>
         </div>
         <hr />
-        Number of results: {{filtered.length}}
+
 
 
       <!-- <div ng-repeat="truck in trucks">

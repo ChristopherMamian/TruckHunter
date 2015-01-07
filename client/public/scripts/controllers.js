@@ -76,8 +76,10 @@
         if (trucks.length > 0) {
             for(var i = 0; i < trucks.length; i++){
                 var address = trucks[i].currentAddress;
+                var name = trucks[i].truckName;
                 if (address) {
                     MarkerFactory.createByAddress(address, function(marker) {
+                        // marker.options.labelContent = name;
                         $scope.map.markers.push(marker);
                         refresh(marker);
                     });

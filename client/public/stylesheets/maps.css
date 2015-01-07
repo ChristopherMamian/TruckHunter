@@ -1,29 +1,16 @@
 body {
-  background: red;
-}
-
-html, body, .map_container {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-/*    font-family: comic Sans MS, verdana, sans-serif;
-*/    background: #fafafa;
-}
-
-.map_container {
-    position: relative;
-    float: left;
-    width: 70%;
-    height: 80%
+  background-image: url("/imgs/san-fran-street.jpg");
+  background-attachment: fixed;
+  background-size: 100% 500px;
+  background-repeat: no-repeat;
+  font-family: comic Sans MS, verdana, sans-serif;
 }
 
 .angular-google-map-container {
-    position: absolute;
+    position: fixed;
     height: 400px;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    width: 100%;
+    padding-top: 50px;
 }
 
 .controls {
@@ -47,5 +34,9 @@ h3 {
 p {
     margin-top: 20px;
     padding: 0 0 50px 20px;
+}
+
+.search-result {
+    border: 5px solid black;
 }
 

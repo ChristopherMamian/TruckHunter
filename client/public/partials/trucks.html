@@ -14,31 +14,6 @@
           </google-map>
         </div>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
 
         <div class="controls">
           <!-- <h3>Current location</h3> -->
@@ -48,7 +23,6 @@
             <button ng-click="addAddress()">Get pin</button>
           </p> -->
         </div>
-
       </div>
         <div ng-repeat="(prop, ignoredValue) in trucks[0]" ng-init="filter[prop]={}">
           <div ng-if="prop == 'foodType' ">
@@ -63,23 +37,12 @@
         Number of results: {{filtered.length}}
         <div ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
             <h3> {{truck.truckName}} </h3>
-              <p> {{truck.currentAddress}} </p>
-              <img ng-src={{truck.profPic}} height=100 width=100>
-              <p> {{truck.foodType}} </p>
-              <button ng-click="followTruck(truck._id)">Follow</button>
+            <p> {{truck.currentAddress}} </p>
+            <img src={{truck.profPic}} height=100 width=100>
+            <p> {{truck.foodType}} </p>
+            <button ng-click="followTruck(truck._id)">Follow</button>
         </div>
         <hr />
-
-
-
-      <!-- <div ng-repeat="truck in trucks">
-        <h3> {{truck.truckName}} </h3>
-        <p> {{truck.currentAddress}} </p>
-        <img src={{truck.profPic}} height=100 width=100>
-        <p> {{truck.foodType}} </p>
-        <button ng-click="followTruck(truck._id)">Follow</button>
-      </div> -->
-
     </div>
   </div>
 </div>

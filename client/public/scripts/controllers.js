@@ -76,8 +76,10 @@
         if (trucks.length > 0) {
             for(var i = 0; i < trucks.length; i++){
                 var address = trucks[i].currentAddress;
+                var name = trucks[i].truckName;
                 if (address) {
                     MarkerFactory.createByAddress(address, function(marker) {
+                        // marker.options.labelContent = name;
                         $scope.map.markers.push(marker);
                         refresh(marker);
                     });
@@ -162,9 +164,50 @@
             TruckFactory.follow(truckId);
         };
 
+        $scope.filter = {};
+
+        $scope.getOptionsFor = function (propName) {
+            return ($scope.trucks || []).map(function (truck) {
+                return truck[propName];
+            }).filter(function (truck, index, arr) {
+                return arr.indexOf(truck) === index;
+            });
+        };
+
+        $scope.filterByProperties = function (truck) {
+            var matchesAND = true;
+            for (var prop in $scope.filter) {
+                // if (noSubFilter($scope.filter[prop])) continue;
+                if (noSubFilter($scope.filter[prop])) continue;
+                // if (!$scope.filter[prop][truck[prop]]) {
+                if (!$scope.filter[prop][truck[prop]]) {
+                    matchesAND = false;
+                    break;
+                }
+            }
+            return matchesAND;
+
+        };
+
+        function noSubFilter(subFilterObj) {
+            for (var key in subFilterObj) {
+                if (subFilterObj[key]) return false;
+            }
+            return true;
+        }
+
         $scope.getTrucks();
 
 }]);
+
+app.filter('capitalizeFirst', function () {
+    return function (str) {
+        str = str || '';
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    };
+});
+
+
 
 /*
 The AuthCtrl

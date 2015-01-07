@@ -162,9 +162,50 @@
             TruckFactory.follow(truckId);
         };
 
+        $scope.filter = {};
+
+        $scope.getOptionsFor = function (propName) {
+            return ($scope.trucks || []).map(function (truck) {
+                return truck[propName];
+            }).filter(function (truck, index, arr) {
+                return arr.indexOf(truck) === index;
+            });
+        };
+
+        $scope.filterByProperties = function (truck) {
+            var matchesAND = true;
+            for (var prop in $scope.filter) {
+                // if (noSubFilter($scope.filter[prop])) continue;
+                if (noSubFilter($scope.filter[prop])) continue;
+                // if (!$scope.filter[prop][truck[prop]]) {
+                if (!$scope.filter[prop][truck[prop]]) {
+                    matchesAND = false;
+                    break;
+                }
+            }
+            return matchesAND;
+
+        };
+
+        function noSubFilter(subFilterObj) {
+            for (var key in subFilterObj) {
+                if (subFilterObj[key]) return false;
+            }
+            return true;
+        }
+
         $scope.getTrucks();
 
 }]);
+
+app.filter('capitalizeFirst', function () {
+    return function (str) {
+        str = str || '';
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    };
+});
+
+
 
 /*
 The AuthCtrl

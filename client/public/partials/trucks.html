@@ -20,13 +20,34 @@
 
       </div>
 
-      <div ng-repeat="truck in trucks">
+        <div ng-repeat="(prop, ignoredValue) in trucks[0]" ng-init="filter[prop]={}">
+          <div ng-if="prop == 'foodType' ">
+          <b>{{prop | capitalizeFirst}}:</b><br />
+          <span class="quarter" ng-repeat="opt in getOptionsFor(prop)">
+            <b><input type="checkbox" ng-model="filter[prop][opt]" />&nbsp;{{opt}}</b>
+          </span>
+            <hr />
+        </div>
+      </div>
+
+        <div ng-repeat="truck in filtered=(trucks | filter:filterByProperties)">
+            <h3> {{truck.truckName}} </h3>
+              <p> {{truck.currentAddress}} </p>
+              <img src={{truck.profPic}} height=100 width=100>
+              <p> {{truck.foodType}} </p>
+              <button ng-click="followTruck(truck._id)">Follow</button>
+        </div>
+        <hr />
+        Number of results: {{filtered.length}}
+
+
+      <!-- <div ng-repeat="truck in trucks">
         <h3> {{truck.truckName}} </h3>
         <p> {{truck.currentAddress}} </p>
         <img src={{truck.profPic}} height=100 width=100>
         <p> {{truck.foodType}} </p>
         <button ng-click="followTruck(truck._id)">Follow</button>
-      </div>
+      </div> -->
 
     </div>
   </div>

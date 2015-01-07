@@ -98,7 +98,7 @@
     function create(latitude, longitude) {
         var marker = {
             options: {
-                animation: 1,
+                animation: 4,
                 labelAnchor: "28 -5",
                 labelClass: 'markerlabel'
             },

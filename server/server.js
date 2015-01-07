@@ -53,6 +53,8 @@
   app.post('/authenticate', routes.authenticate);
   app.post('/signin', routes.signin);
   app.get('/me', routes.ensureAuthorized, routes.me);
+  app.get('/fuck', routes.ensureAuthorized, routes.meTrucks);
+
 
   //These routes handles user login, signup and token based auth. The /me route is protected and can only be seen by users that have accounts. I deleted the /users/new route above because this is taken care of in the signin route. -Sam
 

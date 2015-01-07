@@ -63,9 +63,19 @@
 
         return {
             trucks: function(success, error) {
-                $http.get(baseUrl + '/trucks').success(success).error(error)
+                $http.get(baseUrl + '/trucks').success(success).error(error);
             }
+        };
+}])
+
+.factory('FollowedTruckFactory', ['$http', function($http){
+    var baseUrl = "http://localhost:3000";
+
+    return {
+        followedTrucks: function(success, error){
+            $http.get(baseUrl + '/fuck').success(success).error(error);
         }
+    };
 }])
 
 .factory('MarkerFactory', function () {

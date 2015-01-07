@@ -2,6 +2,30 @@
 
 // $.ajax({
 //   //request from client at 9393 to server at 3000
+//       url: 'http://localhost:3000/users/54ab4618f450b4174b444208/trucks',
+//       type: 'get'
+//     }).done(function(res) {
+//       console.log("here are the trucks");
+//       console.log(res);
+//       console.log('success');
+//     }).fail(function() {
+//       console.log('fail');
+//     });
+
+  //   $.ajax({
+  // //request from client at 9393 to server at 3000
+  //     url: 'http://localhost:3000/fuck',
+  //     type: 'get'
+  //   }).done(function(res) {
+  //     console.log("here are the trucks");
+  //     console.log(res);
+  //     console.log('success');
+  //   }).fail(function() {
+  //     console.log('fail');
+  //   });
+
+// $.ajax({
+//   //request from client at 9393 to server at 3000
 //       url: 'http://localhost:3000/trucks',
 //       type: 'get'
 //     }).done(function(res) {

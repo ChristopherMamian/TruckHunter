@@ -17,15 +17,16 @@
             <button ng-click="addAddress()">Get pin</button>
           </p> -->
         </div>
-
       </div>
 
-      <div ng-repeat="truck in trucks">
+    <div ng-repeat="truck in trucks">
+      <div class="search-result">
         <h3> {{truck.truckName}} </h3>
         <p> {{truck.currentAddress}} </p>
         <img src={{truck.profPic}} height=100 width=100>
         <p> {{truck.foodType}} </p>
       </div>
+    </div>
 
     </div>
   </div>

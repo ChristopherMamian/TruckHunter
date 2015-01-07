@@ -47,7 +47,7 @@
   app.get('/trucks', routes.trucks);
   app.get('/users', routes.users);
   // app.post('/users/new', routes.createUser);
-  app.put('/users/followTruck', routes.followTruck);
+  app.put('/users/followTruck/:truckId', routes.ensureAuthorized, routes.followTruck);
   app.get('/users/:id/trucks', routes.showFollowedTrucks);
   app.delete('/truck/:id/delete', routes.deleteTruck);
   app.post('/authenticate', routes.authenticate);

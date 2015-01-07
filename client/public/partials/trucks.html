@@ -1,20 +1,13 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div ng-controller="TruckCtrl">
-
-      <div ng-controller="MapCtrl">
-        <p>
-          <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
-        </p>
-
-        <div class="map_container" >
-          <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
-            <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
-            </markers>
-          </google-map>
-        </div>
-
-
+<div class="container" ng-controller="TruckCtrl">
+  <div class="row" ng-controller="MapCtrl">
+    <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
+    <div class="map_container" >
+      <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+        <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+        </markers>
+      </google-map>
+    </div>
+  </div>
         <div class="controls">
           <!-- <h3>Current location</h3> -->
 
@@ -35,14 +28,13 @@
       </div>
       <!-- <tr ng-repeat="phone in (filteredPhones = (phones | filter: query))" -->
         Number of results: {{filtered.length}}
-        <div ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
+        <div class="col-md-8 contact-info" ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
+            <img src={{truck.profPic}}>
             <h3> {{truck.truckName}} </h3>
             <p> {{truck.currentAddress}} </p>
-            <img src={{truck.profPic}} height=100 width=100>
             <p> {{truck.foodType}} </p>
             <button ng-click="followTruck(truck._id)">Follow</button>
         </div>
-        <hr />
+        <hr/>
     </div>
-  </div>
 </div>

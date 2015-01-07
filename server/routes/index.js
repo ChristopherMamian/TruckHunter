@@ -146,7 +146,7 @@ module.exports = function () {
   };
 
   functions.meTrucks = function(req, res) {
-    console.log("meTrucks",req.token);
+    // console.log("meTrucks",req.token);
     User.findOne({token: req.token}, function(err, user) {
         if (err) {
           console.log("error")
@@ -159,6 +159,7 @@ module.exports = function () {
         if (user) {
           console.log("User");
           Truck.find({ _id: {$in: user.trucksFollowing }}, function(err, trucks){
+            console.log(trucks)
             res.json(trucks);
           });
         }
@@ -229,16 +230,39 @@ module.exports = function () {
   };
 
   functions.followTruck = function (req, res) {
-    var userID = "54a43031201e3e7a887e1c37";
-    // var truckID = "549cbd751fe3510000000001";
-    var truckID = "549cc182cd77fc0000000001";
+    var truckId = req.param('truckId');
 
+    User.findOne({token: req.token}, function(err, user) {
+        if (err) {
+          console.log("error");
+            res.json({
+                type: false,
+                data: "Error occured: " + err
+            });
+        }
 
-    User.update({_id: userID}, { $push: { trucksFollowing:[truckID]}}, {}, function(err) {
-      if (err)
-        res.send(err);
+        if (user) {
+
+          var userId = user._id;
+          User.update({_id: userId}, { $push: {trucksFollowing: truckId}}, {}, function(err) {
+            if (err)
+              res.send(err);
+          });
+        }
     });
   };
+
+  // functions.followTruck = function (req, res) {
+  //   var userID = "54a43031201e3e7a887e1c37";
+  //   // var truckID = "549cbd751fe3510000000001";
+  //   var truckID = "549cc182cd77fc0000000001";
+
+
+  //   User.update({_id: userID}, { $push: { trucksFollowing:[truckID]}}, {}, function(err) {
+  //     if (err)
+  //       res.send(err);
+  //   });
+  // };
 
   functions.showFollowedTrucks = function (req, res) {
     var userID = req.param('id');
@@ -260,23 +284,6 @@ module.exports = function () {
   functions.list = function (req, res) {
     res.json(trucks);
   };
-
-
-  // functions.me = function(req, res) {
-  //   User.findOne({token: req.token}, function(err, user) {
-  //       if (err) {
-  //           res.json({
-  //               type: false,
-  //               data: "Error occured: " + err
-  //           });
-  //       } else {
-  //           res.json({
-  //               type: true,
-  //               data: user
-  //           });
-  //       }
-  //   });
-  // };
 
   return functions;
 };

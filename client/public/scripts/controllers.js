@@ -157,6 +157,11 @@
                 $rootScope.error = 'Failed to fetch details';
             });
         };
+
+        $scope.followTruck = function(truckId) {
+            TruckFactory.follow(truckId);
+        };
+
         $scope.getTrucks();
 
 }]);

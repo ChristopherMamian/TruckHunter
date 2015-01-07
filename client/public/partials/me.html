@@ -11,19 +11,25 @@
         </div>
 
         <div class="controls">
-          <p>
+          <<!-- p>
             <input type="text" placeholder="San Francisco, Ca" ng-model="address" style="width: 210px"/>
             <button ng-click="addAddress()">Get pin</button>
-          </p>
+          </p> -->
         </div>
 
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
 
-
+      <div class="truck-display">
         <p>{{myDetails.data.email}}</p>
         <p>{{myDetails.data.password}}</p>
         <!-- <p>{{myTrucks.data.truckName}}</p> -->
-
+      </div>
         <div ng-repeat="truck in myTrucks">
           <h3> {{truck.truckName}} </h3>
           <p> {{truck.currentAddress}} </p>

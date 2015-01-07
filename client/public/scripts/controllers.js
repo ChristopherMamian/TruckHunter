@@ -47,7 +47,6 @@
 
 .controller('MeCtrl', ['$rootScope', '$scope', '$location', '$http', 'AuthFactory', 'FollowedTruckFactory', function($rootScope, $scope, $location, $http, AuthFactory, FollowedTruckFactory) {
         var baseUrl = "http://localhost:3000";
-        // $http.get(baseUrl + '/fuck')
         $scope.me = function() {
             AuthFactory.me(function(res) {
                 $scope.myDetails = res;
@@ -77,6 +76,21 @@
         if (trucks.length > 0) {
             for(var i = 0; i < trucks.length; i++){
                 var address = trucks[i].currentAddress;
+                if (address) {
+                    MarkerFactory.createByAddress(address, function(marker) {
+                        $scope.map.markers.push(marker);
+                        refresh(marker);
+                    });
+                }
+            }
+        }
+    });
+
+    $scope.$parent.$watch("myTrucks", function(newValue, oldValue) {
+        var myTrucks = $scope.$parent.myTrucks;
+        if (myTrucks.length > 0) {
+            for(var i = 0; i < myTrucks.length; i++){
+                var address = myTrucks[i].currentAddress;
                 if (address) {
                     MarkerFactory.createByAddress(address, function(marker) {
                         $scope.map.markers.push(marker);

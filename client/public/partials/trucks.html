@@ -2,7 +2,6 @@
   <div class="row" ng-controller="MapCtrl">
     <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
     <button ng-click="clearMarkers()" class="btn btn-success">Clear markas</button>
-
     <div class="map_container col-md-12" >
       <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
         <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
@@ -10,6 +9,7 @@
       </google-map>
     </div>
   </div>
+  <br>
         <div class="controls">
           <!-- <h3>Current location</h3> -->
 
@@ -24,16 +24,19 @@
           <span class="quarter" ng-repeat="opt in getOptionsFor(prop)">
             <b><input type="checkbox" ng-model="filter[prop][opt]" />&nbsp;{{opt}}</b>
           </span>
-            <hr />
         </div>
       </div>
+      <br>
+          <button ng-click="addCurrentLocation()" class="btn btn-success btn-xsm">Current location</button>
+            <hr />
 <!--         Number of results: {git a{filtered.length}}
  -->        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in trucks | filter:filterByProperties">
             <img src={{truck.profPic}}>
             <h3> {{truck.truckName}} </h3>
             <p> {{truck.currentAddress}} </p>
             <p> {{truck.foodType}} </p>
-            <svg ng-click="followTruck(truck._id)" version="1.0" xmlns="http://www.w3.org/2000/svg"
+            <a href="">
+              <svg ng-click="followTruck(truck._id)" version="1.0" xmlns="http://www.w3.org/2000/svg"
 
                      width="25pt" height="25pt" viewBox="0 0 128.000000 128.000000"
                      preserveAspectRatio="xMidYMid meet">
@@ -57,6 +60,7 @@
                     -46 -39 -88 -70 -91 -69 -4 2 -35 29 -70 62 -106 99 -215 137 -296 101z"/>
                     </g>
                     </svg>
+            </a>
         </div>
         <hr/>
 </div>

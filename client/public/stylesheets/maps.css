@@ -57,16 +57,22 @@ table {
 body {
   /*background-image: url("/imgs/san-fran-street.jpg");*/
   background-attachment: fixed;
-  /*background-size: 100%;*/
-  /*background-width: 100%;*/
   background-position: 50% 0;
   background-repeat: no-repeat;
   font-family: comic Sans MS, verdana, sans-serif;
 }
 
-img {
-  max-width:100%;
-  max-height:100%;
+.search-result img {
+  max-height: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.content {
+  margin-top: 1%;
 }
 
 .angular-google-map-container {
@@ -74,16 +80,6 @@ img {
     height: 400px;
     width: 100%;
     margin: auto;
-    margin-top: 65px;
-}
-
-.controls {
-    float: right;
-    width: 30%;
-}
-
-.map_container {
-    /*position: fixed;*/
 }
 
 .markerlabel {
@@ -97,26 +93,12 @@ img {
 
 
 .search-result {
-  /*border: 1px solid #3F4240;*/
-  /*background-color: #E4F6FA;*/
-/*  opacity: 0.8;*/
-  margin-top:1%;
-  margin-bottom: 1%;
-  float: left;
   fill: red;
+  margin-top: 1%;
   min-height:100%;
+  text-align: center;
 }
 
-.search-result img {
-  margin-top: 15px;
-  size: 100%;
-  /*opacity: 1;*/
-}
 
-#follow-svg {
-  fill: red;
-  width:2em;
-  height: 2em;
-}
 
 

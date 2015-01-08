@@ -43,7 +43,9 @@
   }
 
   app.post('/trucks/new', routes.createTruck);
-  app.put('/truck/:id/edit', routes.updateTruck);
+  // app.put('/truck/:id/edit', routes.updateTruck);
+  app.put('/truck/edit', routes.updateTruck);
+
   app.get('/trucks', routes.trucks);
   app.get('/users', routes.users);
   // app.post('/users/new', routes.createUser);

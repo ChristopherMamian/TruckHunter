@@ -47,7 +47,7 @@
 
 // $.ajax({
 //   //post from client at 9393 to server at 3000
-//       url: 'http://localhost:3000/truck/549993771cf63e3cf9000001/edit',
+//       url: 'http://localhost:3000/truck/edit',
 //       type: 'put'
 //     }).done(function(res) {
 //       console.log('update success');

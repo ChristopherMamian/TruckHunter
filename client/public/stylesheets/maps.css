@@ -62,14 +62,18 @@ body {
   font-family: comic Sans MS, verdana, sans-serif;
 }
 
-.search-result img {
+.contact-info img {
   max-height: 200px;
   min-height: 200px;
   max-width: 200px;
   display: block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  border: 5px solid #fff;
+  box-shadow: 5px 10px 10px #B1B1B1;
+  border-radius: 5px 5px;
 }
+
 header {
   margin-bottom: 4%;
 
@@ -79,9 +83,11 @@ header {
 }
 
 .angular-google-map-container {
-    position: fixed;
     height: 400px;
     width: 100%;
+    border: 5px solid #fff;
+    box-shadow: 5px 10px 10px #B1B1B1;
+    border-radius: 10px 10px;
     margin: auto;
 }
 
@@ -95,7 +101,7 @@ header {
 }
 
 
-.search-result {
+.contact-info {
   fill: red;
   margin-top: 1%;
   min-height:100%;

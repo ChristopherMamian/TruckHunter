@@ -25,14 +25,13 @@
             <hr />
         </div>
       </div>
-        Number of results: {{filtered.length}}
-        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
+<!--         Number of results: {git a{filtered.length}}
+ -->        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
             <img src={{truck.profPic}}>
             <h3> {{truck.truckName}} </h3>
             <p> {{truck.currentAddress}} </p>
             <p> {{truck.foodType}} </p>
-            <button ng-click="followTruck(truck._id)">Follow</button>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+            <svg ng-click="followTruck(truck._id)" version="1.0" xmlns="http://www.w3.org/2000/svg"
                      width="25pt" height="25pt" viewBox="0 0 128.000000 128.000000"
                      preserveAspectRatio="xMidYMid meet">
                     <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"

@@ -46,7 +46,7 @@ app.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(M
         // }
 
         // console.log(JSON.stringify(newValue));
-        alert(JSON.stringify(newValue.length));
+        // alert(JSON.stringify(newValue.length));
     }, true);
 
     $scope.$parent.$watch("myTrucks", function(newValue, oldValue) {

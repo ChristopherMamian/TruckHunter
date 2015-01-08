@@ -1,231 +1,231 @@
-'use strict';
+// 'use strict';
 
 /* Controllers */
 //See comments at bottom of page for explanations.
 
-    app.controller('AuthCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'AuthFactory', function($rootScope, $scope, $location, $localStorage, AuthFactory) {
+    // app.controller('AuthCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'AuthFactory', function($rootScope, $scope, $location, $localStorage, AuthFactory) {
 
-        $scope.signin = function() {
-            var formData = {
-                email: $scope.email,
-                password: $scope.password
-            }
-
-            AuthFactory.signin(formData, function(res) {
-                $localStorage.token = res.data.token;
-                $location.path('/me');
-            }, function() {
-                $rootScope.error = 'Failed to signin';
-            })
-        };
-
-        $scope.signup = function() {
-            var formData = {
-                email: $scope.email,
-                password: $scope.password
-            }
-
-            AuthFactory.save(formData, function(res) {
-                $localStorage.token = res.data.token;
-                if (!$localStorage.token) {
-                    throw "not ok";
-                }
-                $location.path('/me');
-            }, function() {
-                $rootScope.error = 'Failed to signup';
-            })
-        };
-
-        $scope.logout = function() {
-            AuthFactory.logout(function() {
-                $location.path('/');
-            }, function() {
-                $rootScope.error = 'Failed to logout';
-            });
-        };
-    }])
-
-.controller('MeCtrl', ['$rootScope', '$scope', '$location', '$http', 'AuthFactory', 'FollowedTruckFactory', function($rootScope, $scope, $location, $http, AuthFactory, FollowedTruckFactory) {
-        var baseUrl = "http://localhost:3000";
-        $scope.me = function() {
-            AuthFactory.me(function(res) {
-                $scope.myDetails = res;
-            }, function() {
-                $rootScope.error = 'Failed to fetch details';
-            });
-        };
-
-        $scope.followedTrucks = function() {
-            FollowedTruckFactory.followedTrucks(function(res) {
-                $scope.myTrucks = res;
-            }, function() {
-                $rootScope.error = 'Failed to fetch details';
-            });
-        };
-
-        $scope.me();
-        $scope.followedTrucks();
-}])
-
-
-.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(MarkerFactory, TruckFactory, $scope) {
-
-
-    // $scope.$parent.$watch("trucks", function(newValue, oldValue) {
-    //     var trucks = $scope.$parent.trucks;
-    //     if (trucks.length > 0) {
-    //         for(var i = 0; i < trucks.length; i++){
-    //             var address = trucks[i].currentAddress;
-    //             var name = trucks[i].truckName;
-    //             if (address) {
-    //                 MarkerFactory.createByAddress(address, function(marker) {
-    //                     marker.options.labelContent = name;
-    //                     $scope.map.markers.push(marker);
-    //                     refresh(marker);
-    //                 });
-    //             }
+    //     $scope.signin = function() {
+    //         var formData = {
+    //             email: $scope.email,
+    //             password: $scope.password
     //         }
-    //     }
-    // });
 
-    $scope.$parent.$watch("filteredTrucks", function(newValue, oldValue) {
+    //         AuthFactory.signin(formData, function(res) {
+    //             $localStorage.token = res.data.token;
+    //             $location.path('/me');
+    //         }, function() {
+    //             $rootScope.error = 'Failed to signin';
+    //         })
+    //     };
 
-        // $scope.map.markers = [];
-        var filteredTrucks = $scope.$parent.filteredTrucks;
-        if (filteredTrucks && filteredTrucks.length > 0) {
-            for(var i = 0; i < filteredTrucks.length; i++){
-                var address = filteredTrucks[i].currentAddress;
-                var name = filteredTrucks[i].truckName;
-                if (address) {
-                    MarkerFactory.createByAddress(address, function(marker) {
-                        marker.options.labelContent = name;
-                        $scope.map.markers.push(marker);
-                        refresh(marker);
-                    });
-                }
-            }
-        }
-    });
+    //     $scope.signup = function() {
+    //         var formData = {
+    //             email: $scope.email,
+    //             password: $scope.password
+    //         }
 
-    $scope.$parent.$watch("myTrucks", function(newValue, oldValue) {
-        var myTrucks = $scope.$parent.myTrucks;
-        if (myTrucks && myTrucks.length > 0) {
-            for(var i = 0; i < myTrucks.length; i++){
-                var address = myTrucks[i].currentAddress;
-                if (address) {
-                    MarkerFactory.createByAddress(address, function(marker) {
-                        $scope.map.markers.push(marker);
-                        refresh(marker);
-                    });
-                }
-            }
-        }
-    });
+    //         AuthFactory.save(formData, function(res) {
+    //             $localStorage.token = res.data.token;
+    //             if (!$localStorage.token) {
+    //                 throw "not ok";
+    //             }
+    //             $location.path('/me');
+    //         }, function() {
+    //             $rootScope.error = 'Failed to signup';
+    //         })
+    //     };
 
-        MarkerFactory.createByCoords(37.779277, -122.41927, function(marker) {
-            $scope.sfMarker = marker;
-        });
+    //     $scope.logout = function() {
+    //         AuthFactory.logout(function() {
+    //             $location.path('/');
+    //         }, function() {
+    //             $rootScope.error = 'Failed to logout';
+    //         });
+    //     };
+    // }])
 
-        $scope.address = '';
+// .controller('MeCtrl', ['$rootScope', '$scope', '$location', '$http', 'AuthFactory', 'FollowedTruckFactory', function($rootScope, $scope, $location, $http, AuthFactory, FollowedTruckFactory) {
+//         var baseUrl = "http://localhost:3000";
+//         $scope.me = function() {
+//             AuthFactory.me(function(res) {
+//                 $scope.myDetails = res;
+//             }, function() {
+//                 $rootScope.error = 'Failed to fetch details';
+//             });
+//         };
 
-        $scope.map = {
-            center: {
-                latitude: $scope.sfMarker.latitude,
-                longitude: $scope.sfMarker.longitude
-            },
-            zoom: 12,
-            markers: [],
-            control: {},
-            options: {
-                scrollwheel: false
-            }
-        };
+//         $scope.followedTrucks = function() {
+//             FollowedTruckFactory.followedTrucks(function(res) {
+//                 $scope.myTrucks = res;
+//             }, function() {
+//                 $rootScope.error = 'Failed to fetch details';
+//             });
+//         };
 
-        $scope.map.markers.push($scope.sfMarker);
-
-        $scope.addCurrentLocation = function () {
-            MarkerFactory.createByCurrentLocation(function(marker) {
-                marker.options.labelContent = 'You´re here';
-                $scope.map.markers.push(marker);
-                refresh(marker);
-            });
-        };
-
-        $scope.addAddress = function() {
-            //add addresses here from truckFactory
-            var address = $scope.address;
-            if (address !== '') {
-                MarkerFactory.createByAddress(address, function(marker) {
-                    $scope.map.markers.push(marker);
-                    refresh(marker);
-                });
-            }
-        };
-
-        function refresh(marker) {
-            $scope.map.control.refresh({latitude: marker.latitude,
-                longitude: marker.longitude});
-        }
-
-    }])
-
-.controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'TruckFactory', function($rootScope, $scope, $location, $localStorage, TruckFactory) {
-
-        $scope.getTrucks = function() {
-            TruckFactory.trucks(function(res) {
-                $scope.trucks = res;
-            }, function() {
-                $rootScope.error = 'Failed to fetch details';
-            });
-        };
+//         $scope.me();
+//         $scope.followedTrucks();
+// }])
 
 
-        $scope.followTruck = function(truckId) {
-            TruckFactory.follow(truckId);
-        };
+// .controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(MarkerFactory, TruckFactory, $scope) {
 
-        $scope.filter = {};
 
-        $scope.getOptionsFor = function (propName) {
-            return ($scope.trucks || []).map(function (truck) {
-                return truck[propName];
-            }).filter(function (truck, index, arr) {
-                return arr.indexOf(truck) === index;
-            });
-        };
+//     // $scope.$parent.$watch("trucks", function(newValue, oldValue) {
+//     //     var trucks = $scope.$parent.trucks;
+//     //     if (trucks.length > 0) {
+//     //         for(var i = 0; i < trucks.length; i++){
+//     //             var address = trucks[i].currentAddress;
+//     //             var name = trucks[i].truckName;
+//     //             if (address) {
+//     //                 MarkerFactory.createByAddress(address, function(marker) {
+//     //                     marker.options.labelContent = name;
+//     //                     $scope.map.markers.push(marker);
+//     //                     refresh(marker);
+//     //                 });
+//     //             }
+//     //         }
+//     //     }
+//     // });
 
-        $scope.filterByProperties = function (truck) {
-            var matchesAND = true;
-            for (var prop in $scope.filter) {
-                // if (noSubFilter($scope.filter[prop])) continue;
-                if (noSubFilter($scope.filter[prop])) continue;
-                // if (!$scope.filter[prop][truck[prop]]) {
-                if (!$scope.filter[prop][truck[prop]]) {
-                    matchesAND = false;
-                    break;
-                }
-            }
-            return matchesAND;
+//     $scope.$parent.$watch("filteredTrucks", function(newValue, oldValue) {
 
-        };
+//         // $scope.map.markers = [];
+//         var filteredTrucks = $scope.$parent.filteredTrucks;
+//         if (filteredTrucks && filteredTrucks.length > 0) {
+//             for(var i = 0; i < filteredTrucks.length; i++){
+//                 var address = filteredTrucks[i].currentAddress;
+//                 var name = filteredTrucks[i].truckName;
+//                 if (address) {
+//                     MarkerFactory.createByAddress(address, function(marker) {
+//                         marker.options.labelContent = name;
+//                         $scope.map.markers.push(marker);
+//                         refresh(marker);
+//                     });
+//                 }
+//             }
+//         }
+//     });
 
-        function noSubFilter(subFilterObj) {
-            for (var key in subFilterObj) {
-                if (subFilterObj[key]) return false;
-            }
-            return true;
-        }
+//     $scope.$parent.$watch("myTrucks", function(newValue, oldValue) {
+//         var myTrucks = $scope.$parent.myTrucks;
+//         if (myTrucks && myTrucks.length > 0) {
+//             for(var i = 0; i < myTrucks.length; i++){
+//                 var address = myTrucks[i].currentAddress;
+//                 if (address) {
+//                     MarkerFactory.createByAddress(address, function(marker) {
+//                         $scope.map.markers.push(marker);
+//                         refresh(marker);
+//                     });
+//                 }
+//             }
+//         }
+//     });
 
-        $scope.getTrucks();
+//         MarkerFactory.createByCoords(37.779277, -122.41927, function(marker) {
+//             $scope.sfMarker = marker;
+//         });
 
-}]);
+//         $scope.address = '';
 
-app.filter('capitalizeFirst', function () {
-    return function (str) {
-        str = str || '';
-        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
-    };
-});
+//         $scope.map = {
+//             center: {
+//                 latitude: $scope.sfMarker.latitude,
+//                 longitude: $scope.sfMarker.longitude
+//             },
+//             zoom: 12,
+//             markers: [],
+//             control: {},
+//             options: {
+//                 scrollwheel: false
+//             }
+//         };
+
+//         $scope.map.markers.push($scope.sfMarker);
+
+//         $scope.addCurrentLocation = function () {
+//             MarkerFactory.createByCurrentLocation(function(marker) {
+//                 marker.options.labelContent = 'You´re here';
+//                 $scope.map.markers.push(marker);
+//                 refresh(marker);
+//             });
+//         };
+
+//         $scope.addAddress = function() {
+//             //add addresses here from truckFactory
+//             var address = $scope.address;
+//             if (address !== '') {
+//                 MarkerFactory.createByAddress(address, function(marker) {
+//                     $scope.map.markers.push(marker);
+//                     refresh(marker);
+//                 });
+//             }
+//         };
+
+//         function refresh(marker) {
+//             $scope.map.control.refresh({latitude: marker.latitude,
+//                 longitude: marker.longitude});
+//         }
+
+//     }])
+
+// .controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'TruckFactory', function($rootScope, $scope, $location, $localStorage, TruckFactory) {
+
+//         $scope.getTrucks = function() {
+//             TruckFactory.trucks(function(res) {
+//                 $scope.trucks = res;
+//             }, function() {
+//                 $rootScope.error = 'Failed to fetch details';
+//             });
+//         };
+
+
+//         $scope.followTruck = function(truckId) {
+//             TruckFactory.follow(truckId);
+//         };
+
+//         $scope.filter = {};
+
+//         $scope.getOptionsFor = function (propName) {
+//             return ($scope.trucks || []).map(function (truck) {
+//                 return truck[propName];
+//             }).filter(function (truck, index, arr) {
+//                 return arr.indexOf(truck) === index;
+//             });
+//         };
+
+//         $scope.filterByProperties = function (truck) {
+//             var matchesAND = true;
+//             for (var prop in $scope.filter) {
+//                 // if (noSubFilter($scope.filter[prop])) continue;
+//                 if (noSubFilter($scope.filter[prop])) continue;
+//                 // if (!$scope.filter[prop][truck[prop]]) {
+//                 if (!$scope.filter[prop][truck[prop]]) {
+//                     matchesAND = false;
+//                     break;
+//                 }
+//             }
+//             return matchesAND;
+
+//         };
+
+//         function noSubFilter(subFilterObj) {
+//             for (var key in subFilterObj) {
+//                 if (subFilterObj[key]) return false;
+//             }
+//             return true;
+//         }
+
+//         $scope.getTrucks();
+
+// }]);
+
+// app.filter('capitalizeFirst', function () {
+//     return function (str) {
+//         str = str || '';
+//         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+//     };
+// });
 
 
 

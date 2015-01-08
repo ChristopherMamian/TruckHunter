@@ -13,19 +13,20 @@
 
 
     <div class="row content">
+      <div class="col">
 
 
-        <div class="col-md-4 col-sm-6 search-result" ng-repeat="truck in trucks">
+      </div>
 
-                    <div class="">
-                      <img  src={{truck.profPic}}>
-                    </div>
+        <div class="col-md-4 col-sm-6" ng-repeat="truck in trucks">
 
                     <div class="contact-info">
+                      <img src={{truck.profPic}}>
                       <h3> {{truck.truckName}} </h3>
                       <p> {{truck.currentAddress}} </p>
                       <p> {{truck.foodType}} </p>
-                    </div>
+
+
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                      width="25pt" height="25pt" viewBox="0 0 128.000000 128.000000"
                      preserveAspectRatio="xMidYMid meet">
@@ -52,7 +53,7 @@
                       <!-- <span class="like glyphicon glyphicon-heart"></span> -->
 
 
-
+                      </div>
         </div>
     </div>
 

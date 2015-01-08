@@ -200,12 +200,18 @@ module.exports = function () {
 };
 
   functions.updateTruck = function (req, res) {
+//     handle: "BellyBurgers",
+// address:"  1550 Howard Street, San Francisco, CA"
+// },
 
-    var id = req.param('id');
 
-    Truck.update({ _id: id },
+for(var i =0; i < trucks.length; i++){
+  var handle = trucks[i].handle;
+  var address = trucks[i].address;
+
+    Truck.update({ twitterHandle: handle },
     // TruckSchema.update({ _id: id },
-      { $set: { truckName: 'Nicks Tacos'}},
+      { $set: { currentAddress: address}},
         function (err) {
           if (err) {
             console.log(err);
@@ -215,6 +221,23 @@ module.exports = function () {
           }
         }
     );
+
+}
+
+
+
+    // Truck.update({ _id: id },
+    // // TruckSchema.update({ _id: id },
+    //   { $set: { truckName: 'Nicks Tacos'}},
+    //     function (err) {
+    //       if (err) {
+    //         console.log(err);
+    //         res.status(500).json({status: 'failure'});
+    //       } else {
+    //         res.json({status: 'success'});
+    //       }
+    //     }
+    // );
 
   };
 

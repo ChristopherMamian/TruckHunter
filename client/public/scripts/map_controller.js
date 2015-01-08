@@ -27,10 +27,11 @@ app.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(M
         if (filteredTrucks && filteredTrucks.length > 0) {
             for(var i = 0; i < filteredTrucks.length; i++){
                 var address = filteredTrucks[i].currentAddress;
-                var name = filteredTrucks[i].truckName;
+                // var name = filteredTrucks[i].truckName;
                 if (address) {
+                    console.log("inside address block");
                     MarkerFactory.createByAddress(address, function(marker) {
-                        marker.options.labelContent = name;
+                        // marker.options.labelContent = name;
                         $scope.map.markers.push(marker);
                         refresh(marker);
                     });
@@ -38,6 +39,15 @@ app.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(M
             }
         }
     });
+
+    $scope.$watch("map.markers", function(newValue, oldValue) {
+        // if(newValue == oldValue){
+        //     return;
+        // }
+
+        // console.log(JSON.stringify(newValue));
+        alert(JSON.stringify(newValue.length));
+    }, true);
 
     $scope.$parent.$watch("myTrucks", function(newValue, oldValue) {
         var myTrucks = $scope.$parent.myTrucks;

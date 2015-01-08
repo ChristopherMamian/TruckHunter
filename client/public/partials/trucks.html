@@ -4,8 +4,8 @@
 
       <div ng-controller="MapCtrl">
         <p>
-                <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
-            </p>
+          <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
+        </p>
 
         <div class="map_container" >
           <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
@@ -59,12 +59,12 @@
             <hr />
         </div>
       </div>
-
+      <!-- <tr ng-repeat="phone in (filteredPhones = (phones | filter: query))" -->
         Number of results: {{filtered.length}}
-        <div ng-repeat="truck in filtered=(trucks | filter:filterByProperties)">
+        <div ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
             <h3> {{truck.truckName}} </h3>
               <p> {{truck.currentAddress}} </p>
-              <img src={{truck.profPic}} height=100 width=100>
+              <img ng-src={{truck.profPic}} height=100 width=100>
               <p> {{truck.foodType}} </p>
               <button ng-click="followTruck(truck._id)">Follow</button>
         </div>

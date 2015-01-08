@@ -71,15 +71,34 @@
 .controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(MarkerFactory, TruckFactory, $scope) {
 
 
-    $scope.$parent.$watch("trucks", function(newValue, oldValue) {
-        var trucks = $scope.$parent.trucks;
-        if (trucks.length > 0) {
-            for(var i = 0; i < trucks.length; i++){
-                var address = trucks[i].currentAddress;
-                var name = trucks[i].truckName;
+    // $scope.$parent.$watch("trucks", function(newValue, oldValue) {
+    //     var trucks = $scope.$parent.trucks;
+    //     if (trucks.length > 0) {
+    //         for(var i = 0; i < trucks.length; i++){
+    //             var address = trucks[i].currentAddress;
+    //             var name = trucks[i].truckName;
+    //             if (address) {
+    //                 MarkerFactory.createByAddress(address, function(marker) {
+    //                     marker.options.labelContent = name;
+    //                     $scope.map.markers.push(marker);
+    //                     refresh(marker);
+    //                 });
+    //             }
+    //         }
+    //     }
+    // });
+
+    $scope.$parent.$watch("filteredTrucks", function(newValue, oldValue) {
+
+        // $scope.map.markers = [];
+        var filteredTrucks = $scope.$parent.filteredTrucks;
+        if (filteredTrucks && filteredTrucks.length > 0) {
+            for(var i = 0; i < filteredTrucks.length; i++){
+                var address = filteredTrucks[i].currentAddress;
+                var name = filteredTrucks[i].truckName;
                 if (address) {
                     MarkerFactory.createByAddress(address, function(marker) {
-                        // marker.options.labelContent = name;
+                        marker.options.labelContent = name;
                         $scope.map.markers.push(marker);
                         refresh(marker);
                     });
@@ -90,7 +109,7 @@
 
     $scope.$parent.$watch("myTrucks", function(newValue, oldValue) {
         var myTrucks = $scope.$parent.myTrucks;
-        if (myTrucks.length > 0) {
+        if (myTrucks && myTrucks.length > 0) {
             for(var i = 0; i < myTrucks.length; i++){
                 var address = myTrucks[i].currentAddress;
                 if (address) {
@@ -159,6 +178,7 @@
                 $rootScope.error = 'Failed to fetch details';
             });
         };
+
 
         $scope.followTruck = function(truckId) {
             TruckFactory.follow(truckId);

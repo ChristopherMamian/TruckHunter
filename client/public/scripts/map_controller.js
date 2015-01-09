@@ -2,34 +2,17 @@
 app.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(MarkerFactory, TruckFactory, $scope) {
 
 
-    // $scope.$parent.$watch("trucks", function(newValue, oldValue) {
-    //     var trucks = $scope.$parent.trucks;
-    //     if (trucks.length > 0) {
-    //         for(var i = 0; i < trucks.length; i++){
-    //             var address = trucks[i].currentAddress;
-    //             var name = trucks[i].truckName;
-    //             if (address) {
-    //                 MarkerFactory.createByAddress(address, function(marker) {
-    //                     marker.options.labelContent = name;
-    //                     $scope.map.markers.push(marker);
-    //                     refresh(marker);
-    //                 });
-    //             }
-    //         }
-    //     }
-    // });
-
-    $scope.$parent.$watch("filteredTrucks", function(newValue, oldValue) {
-        // console.log($scope.map.markers);
-        // $scope.map.markers = [];
-        // console.log($scope.map.markers);
-        var filteredTrucks = $scope.$parent.filteredTrucks;
-        if (filteredTrucks && filteredTrucks.length > 0) {
-            for(var i = 0; i < filteredTrucks.length; i++){
-                var address = filteredTrucks[i].currentAddress;
-                // var name = filteredTrucks[i].truckName;
+    $scope.$parent.$watch("trucks", function(newValue, oldValue) {
+        // alert($scope.$parent.trucks.length);
+        // $scope.map.markers.length = 0;
+        // alert($scope.$parent.trucks.length);
+        var trucks = $scope.$parent.trucks;
+        console.log(trucks);
+        if (trucks && trucks.length > 0) {
+            for(var i = 0; i < trucks.length; i++){
+                var address = trucks[i].currentAddress;
+                var name = trucks[i].truckName;
                 if (address) {
-                    console.log("inside address block");
                     MarkerFactory.createByAddress(address, function(marker) {
                         // marker.options.labelContent = name;
                         $scope.map.markers.push(marker);
@@ -39,6 +22,27 @@ app.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(M
             }
         }
     });
+
+    // $scope.$parent.$watch("filteredTrucks", function(newValue, oldValue) {
+    //     // console.log($scope.map.markers);
+    //         $scope.map.markers.length = 0;
+    //         // console.log($scope.map.markers);
+    //     var filteredTrucks = $scope.$parent.filteredTrucks;
+    //     if (filteredTrucks && filteredTrucks.length > 0) {
+    //         for(var i = 0; i < filteredTrucks.length; i++){
+    //             var address = filteredTrucks[i].currentAddress;
+    //             // var name = filteredTrucks[i].truckName;
+    //             if (address) {
+    //                 console.log("inside address block");
+    //                 MarkerFactory.createByAddress(address, function(marker) {
+    //                     // marker.options.labelContent = name;
+    //                     $scope.map.markers.push(marker);
+    //                     refresh(marker);
+    //                 });
+    //             }
+    //         }
+    //     }
+    // });
 
     $scope.$watch("map.markers", function(newValue, oldValue) {
         // if(newValue == oldValue){
@@ -84,6 +88,11 @@ app.controller('MapCtrl', ['MarkerFactory', 'TruckFactory', '$scope', function(M
         };
 
         $scope.map.markers.push($scope.sfMarker);
+
+        $scope.clearMarkers = function () {
+            console.log("fck");
+            $scope.map.markers = [];
+        }
 
         $scope.addCurrentLocation = function () {
             MarkerFactory.createByCurrentLocation(function(marker) {

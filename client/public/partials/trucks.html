@@ -1,6 +1,8 @@
-<div ng-controller="TruckCtrl">
+<div ng-controller="TruckCtrl" ng-init="getTrucks()">
   <div class="row" ng-controller="MapCtrl">
     <button ng-click="addCurrentLocation()" class="btn btn-success">Current location</button>
+    <button ng-click="clearMarkers()" class="btn btn-success">Clear markas</button>
+
     <div class="map_container col-md-12" >
       <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
         <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
@@ -26,7 +28,7 @@
         </div>
       </div>
 <!--         Number of results: {git a{filtered.length}}
- -->        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in filteredTrucks = (trucks | filter:filterByProperties)">
+ -->        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in trucks | filter:filterByProperties">
             <img src={{truck.profPic}}>
             <h3> {{truck.truckName}} </h3>
             <p> {{truck.currentAddress}} </p>

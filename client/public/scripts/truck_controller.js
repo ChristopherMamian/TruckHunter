@@ -1,6 +1,7 @@
 app.controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'TruckFactory', function($rootScope, $scope, $location, $localStorage, TruckFactory) {
 
         $scope.getTrucks = function() {
+            console.log("get trucks");
             TruckFactory.trucks(function(res) {
                 $scope.trucks = res;
             }, function() {
@@ -45,7 +46,7 @@ app.controller('TruckCtrl', ['$rootScope', '$scope', '$location', '$localStorage
             return true;
         }
 
-        $scope.getTrucks();
+        // $scope.getTrucks();
 
 }]);
 

@@ -18,16 +18,20 @@
             <button ng-click="addAddress()">Get pin</button>
           </p> -->
         </div>
-        <div ng-repeat="(prop, ignoredValue) in trucks[0]" ng-init="filter[prop]={}">
-          <div ng-if="prop == 'foodType' ">
-          <b>{{prop | capitalizeFirst}}:</b><br />
-          <span class="quarter" ng-repeat="opt in getOptionsFor(prop)">
-            <b><input type="checkbox" ng-model="filter[prop][opt]" />&nbsp;{{opt}}</b>
-          </span>
+
+        <div class="custom-panel">
+          <div ng-repeat="(prop, ignoredValue) in trucks[0]" ng-init="filter[prop]={}">
+            <div ng-if="prop == 'foodType' ">
+              <b>{{prop | capitalizeFirst}}:</b><br />
+               <span class="tags quarter" ng-repeat="opt in getOptionsFor(prop)">
+                <b><input type="checkbox" ng-model="filter[prop][opt]" />&nbsp;{{opt}}</b>
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
       <br>
-          <button ng-click="addCurrentLocation()" class="btn btn-success btn-xsm">Current location</button>
+      <button ng-click="hunt()" class="custom-panel btn btn-success btn-xsm">Hunt</button>
+      <button ng-click="addCurrentLocation()" class="custom-panel pull-right btn btn-success btn-xsm">Current location</button>
             <hr />
 <!--         Number of results: {git a{filtered.length}}
  -->        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in trucks | filter:filterByProperties">

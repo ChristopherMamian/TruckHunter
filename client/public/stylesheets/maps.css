@@ -109,5 +109,14 @@ header {
 }
 
 
+.custom-panel {
+  border: 5px solid #EDEDED;
+  box-shadow: 5px 10px 20px #B1B1B1;
+  border-radius: 5px 5px;
+  background-color:#EDEDED;
+}
 
+.tags {
+  margin: 5px;
+}
 

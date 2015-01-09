@@ -1,0 +1,62 @@
+<div ng-controller="TruckCtrl" ng-init="getTrucks()">
+  <div class="row" ng-controller="MapCtrl">
+    <div class="pull-right">
+    <button ng-click="addCurrentLocation()" class="btn btn-success btn-xsm">Find Me</button>
+    <button ng-click="clearMarkers()" class="btn btn-success btn-xsm">Clear Markers</button>
+  </div>
+  <br>
+  <br>
+    <div class="map_container">
+      <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+        <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+        </markers>
+      </google-map>
+    </div>
+  </div>
+  <br>
+        <div class="custom-panel">
+          <div ng-repeat="(prop, ignoredValue) in trucks[0]" ng-init="filter[prop]={}">
+            <div ng-if="prop == 'foodType' ">
+              <b>{{prop | capitalizeFirst}}:</b><br />
+               <span class="tags quarter" ng-repeat="opt in getOptionsFor(prop)">
+                <b><input type="checkbox" ng-model="filter[prop][opt]" />&nbsp;{{opt}}</b>
+              </span>
+            </div>
+          </div>
+        </div>
+      <br>
+            <hr />
+<!--         Number of results: {git a{filtered.length}}
+ -->        <div class="col-md-4 col-md-6 contact-info" ng-repeat="truck in trucks | filter:filterByProperties">
+            <img src={{truck.profPic}}>
+            <h3> {{truck.truckName}} </h3>
+            <p> {{truck.currentAddress}} </p>
+            <p> {{truck.foodType}} </p>
+            <a href="">
+              <svg ng-click="followTruck(truck._id)" version="1.0" xmlns="http://www.w3.org/2000/svg"
+        width="25pt" height="25pt" viewBox="0 0 128.000000 128.000000"
+        preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
+        fill="#000000" stroke="none">
+        <path d="M255 1140 c-46 -16 -71 -33 -108 -72 -59 -63 -82 -132 -82 -238 1
+        -67 5 -84 42 -160 53 -110 195 -274 333 -385 14 -11 53 -42 87 -70 34 -27 61
+        -50 60 -52 -1 -1 -68 -4 -147 -7 -338 -12 -390 -18 -390 -51 0 -13 42 -33 70
+        -34 8 0 109 -3 225 -8 252 -9 494 -9 670 0 145 7 171 11 191 28 39 32 1 45
+        -162 56 -71 4 -182 8 -246 8 -65 0 -118 3 -118 6 0 5 48 45 95 81 117 88 280
+        253 342 347 21 31 48 83 62 116 52 126 23 290 -67 378 -62 61 -168 90 -247 68
+        -22 -6 -44 -11 -50 -12 -5 0 -30 -16 -55 -34 -69 -50 -122 -85 -130 -85 -3 0
+        -33 21 -66 46 -82 64 -124 83 -191 89 -42 4 -74 -1 -118 -15z m170 -14 c26 -8
+        73 -35 105 -59 103 -80 113 -81 190 -16 167 140 352 108 436 -75 35 -78 37
+        -184 4 -269 -40 -105 -199 -288 -379 -437 -30 -25 -59 -50 -65 -55 -24 -22
+        -66 -45 -84 -45 -52 0 -354 274 -448 406 -77 107 -99 166 -98 264 0 69 5 94
+        24 135 33 68 96 125 161 146 67 22 93 23 154 5z"/>
+        <path d="M263 1055 c-36 -15 -86 -79 -104 -132 -28 -86 4 -198 88 -310 84
+        -112 293 -312 366 -350 27 -13 31 -13 65 13 20 15 44 35 54 43 9 9 38 34 64
+        56 117 96 258 261 294 343 76 169 -12 352 -169 352 -55 0 -98 -23 -201 -109
+        -46 -39 -88 -70 -91 -69 -4 2 -35 29 -70 62 -106 99 -215 137 -296 101z"/>
+        </g>
+        </svg>
+      </a>
+    </div>
+  <hr/>
+</div>

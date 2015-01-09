@@ -1,0 +1,42 @@
+<div class="row" data-ng-controller="MeCtrl">
+    <div class="col-lg-12">
+
+      <div ng-controller="MapCtrl">
+
+        <div class="map_container" >
+          <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+            <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+            </markers>
+          </google-map>
+        </div>
+
+        <div class="controls">
+          <!-- p>
+            <input type="text" placeholder="San Francisco, Ca" ng-model="address" style="width: 210px"/>
+            <button ng-click="addAddress()">Get pin</button>
+          </p> -->
+        </div>
+
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="truck-display">
+        <p>{{myDetails.data.email}}</p>
+        <p>{{myDetails.data.password}}</p>
+        <!-- <p>{{myTrucks.data.truckName}}</p> -->
+      </div>
+        <div ng-repeat="truck in myTrucks">
+          <div class="search-result">
+            <h3> {{truck.truckName}} </h3>
+            <p> {{truck.currentAddress}} </p>
+            <img src={{truck.profPic}} height=100 width=100>
+            <p> {{truck.foodType}} </p>
+          </div>
+      </div>
+    </div>
+</div>
